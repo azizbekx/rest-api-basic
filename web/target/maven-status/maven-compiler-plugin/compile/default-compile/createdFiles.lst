@@ -1,0 +1,8 @@
+com/epam/esm/api/GiftCertificateApiController.class
+com/epam/esm/config/SpringConfig.class
+com/epam/esm/api/TagApiController.class
+com/epam/esm/config/SpringDispatcherConfig.class
+com/epam/esm/api/ExceptionsHandler.class
+com/epam/esm/response/ErrorResponseCode.class
+com/epam/esm/response/ErrorResponse.class
+com/epam/esm/response/SuccessResponse.class

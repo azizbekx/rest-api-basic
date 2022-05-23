@@ -1,0 +1,12 @@
+/home/azizbek/Projects/epam/module-2/rest-api-basic/persistence/src/main/java/com/epam/esm/repository/TagDao.java
+/home/azizbek/Projects/epam/module-2/rest-api-basic/persistence/src/main/java/com/epam/esm/response/ExceptionDaoMessageCode.java
+/home/azizbek/Projects/epam/module-2/rest-api-basic/persistence/src/main/java/com/epam/esm/repository/CRUDDao.java
+/home/azizbek/Projects/epam/module-2/rest-api-basic/persistence/src/main/java/com/epam/esm/response/DaoException.java
+/home/azizbek/Projects/epam/module-2/rest-api-basic/persistence/src/main/java/com/epam/esm/repository/GiftCertificateDao.java
+/home/azizbek/Projects/epam/module-2/rest-api-basic/persistence/src/main/java/com/epam/esm/mapper/TagRowMapper.java
+/home/azizbek/Projects/epam/module-2/rest-api-basic/persistence/src/main/java/com/epam/esm/mapper/GiftCertificateListRowMapper.java
+/home/azizbek/Projects/epam/module-2/rest-api-basic/persistence/src/main/java/com/epam/esm/repository/impl/TagDaoImpl.java
+/home/azizbek/Projects/epam/module-2/rest-api-basic/persistence/src/main/java/com/epam/esm/config/DataConfig.java
+/home/azizbek/Projects/epam/module-2/rest-api-basic/persistence/src/main/java/com/epam/esm/repository/CRDDao.java
+/home/azizbek/Projects/epam/module-2/rest-api-basic/persistence/src/main/java/com/epam/esm/config/DataTestConfig.java
+/home/azizbek/Projects/epam/module-2/rest-api-basic/persistence/src/main/java/com/epam/esm/repository/impl/GiftCertificateDaoImpl.java

@@ -1,0 +1,11 @@
+com/epam/esm/repository/TagDao.class
+com/epam/esm/repository/CRDDao.class
+com/epam/esm/response/ExceptionDaoMessageCode.class
+com/epam/esm/repository/impl/TagDaoImpl.class
+com/epam/esm/mapper/GiftCertificateListRowMapper.class
+com/epam/esm/repository/GiftCertificateDao.class
+com/epam/esm/repository/impl/GiftCertificateDaoImpl.class
+com/epam/esm/response/DaoException.class
+com/epam/esm/repository/CRUDDao.class
+com/epam/esm/config/DataConfig.class
+com/epam/esm/mapper/TagRowMapper.class
