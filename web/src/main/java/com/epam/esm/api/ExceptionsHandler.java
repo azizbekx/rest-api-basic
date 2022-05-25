@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,4 +37,8 @@ public class ExceptionsHandler {
         return new ErrorResponse(405,ErrorResponseCode.errorResponseCode(405));
     }
 
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public @ResponseBody ErrorResponse handleMethodNotFound() {
+        return new ErrorResponse(404,"Method not found");
+    }
 }

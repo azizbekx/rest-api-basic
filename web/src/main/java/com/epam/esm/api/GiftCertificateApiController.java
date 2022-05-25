@@ -59,7 +59,7 @@ public class GiftCertificateApiController {
      * @return boolean if operation successfully updated return true, else return false
      * @throws DaoException an exception thrown in case of not found object in db
      */
-    @PutMapping("/update")
+    @PatchMapping("/update")
     public @ResponseBody SuccessResponse update(@RequestBody GiftCertificateDto giftCertificateDto) throws DaoException{
         boolean success = giftCertificateService.update(giftCertificateDto);
         return new SuccessResponse(success,"Object was successfully updated (id = "+giftCertificateDto.getId()+" )");

@@ -44,8 +44,8 @@ public class TagApiController {
     }
 
     @GetMapping("/filter")
-    public TagDto getByName(@RequestParam Map<String, String> map) throws DaoException{
-        return tagService.getByName(map.get("tag_name"));
+    public TagDto getByName(@RequestParam(value = "tag_name") String tag_name) throws DaoException{
+        return tagService.getByName(tag_name);
     }
 
     /**

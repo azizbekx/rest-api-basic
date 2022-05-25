@@ -1,12 +1,14 @@
 package com.epam.esm.repository;
 
-import com.epam.esm.config.DataConfig;
 import com.epam.esm.config.DataTestConfig;
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.Tag;
 import com.epam.esm.repository.impl.GiftCertificateDaoImpl;
 import com.epam.esm.response.DaoException;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
@@ -21,13 +23,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ContextConfiguration(classes = DataConfig.class)
+@ContextConfiguration(classes = DataTestConfig.class)
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class GiftCertificateDaoImplTest {
 
     @Autowired
-    private GiftCertificateDao giftDao;
+    private GiftCertificateDaoImpl giftDao;
 
     private static final Tag TAG_1 = new Tag(1,"tag_1");
     private static final Tag TAG_2 = new Tag(2,"tag_2");
@@ -55,11 +58,13 @@ public class GiftCertificateDaoImplTest {
                     LocalDateTime.parse("2021-08-29T06:12:15.156"),
                     Collections.singletonList(new Tag()));
     @Test
+    @Order(1)
     public void getById_test() throws DaoException {
         GiftCertificate actual = giftDao.getById(4);
         assertEquals(GIFT_CERTIFICATE_4,actual);
     }
     @Test
+    @Order(2)
     public void getAll_test() throws DaoException {
         List<GiftCertificate> actual = giftDao.list();
         List<GiftCertificate> expected = Arrays.asList(
@@ -70,6 +75,7 @@ public class GiftCertificateDaoImplTest {
         assertEquals(expected, actual);
     }
     @Test
+    @Order(3)
     public void insert_test() throws DaoException{
         GiftCertificate reqGiftC = new GiftCertificate(
                 "The Beatles",
@@ -78,8 +84,9 @@ public class GiftCertificateDaoImplTest {
                 2,
                 LocalDateTime.parse("2019-08-29T06:12:15.156"),
                 LocalDateTime.parse("2021-08-29T06:12:15.156"),
-                Arrays.asList(new Tag(1,"tag_1"), new Tag(5,"tag_44")));
+                Arrays.asList(new Tag(1,"tag_1"), new Tag(4,"tag_4")));
 
+        Tag tag = new Tag(5,"tag_5");
         GiftCertificate expected = new GiftCertificate(
                 5,
                 "The Beatles",
@@ -88,7 +95,7 @@ public class GiftCertificateDaoImplTest {
                 2,
                 LocalDateTime.parse("2019-08-29T06:12:15.156"),
                 LocalDateTime.parse("2021-08-29T06:12:15.156"),
-                Arrays.asList(TAG_3, TAG_4));
+                Arrays.asList(TAG_1, TAG_4));
 
         long id = giftDao.insert(reqGiftC);
         reqGiftC.setId(id);
@@ -96,11 +103,49 @@ public class GiftCertificateDaoImplTest {
         assertEquals(expected, reqGiftC);
     }
 
+
     @Test
+    @Order(4)
     public void delete_test() throws DaoException{
         boolean success = giftDao.removeById(1);
         assertTrue(success);
-        assertNull(giftDao.getById(1));
     }
+
+    @Test
+    @Order(5)
+    public void update_test() throws DaoException{
+        GiftCertificate reqGiftC = new GiftCertificate();
+        reqGiftC.setId(1);
+        reqGiftC.setName("The Beatles");
+        reqGiftC.setDescription("Hello WOrld!.");
+        reqGiftC.setCreateDate(LocalDateTime.parse("2019-08-29T06:12:15.156"));
+        reqGiftC.setLastUpdateTime( LocalDateTime.parse("2021-08-29T06:12:15.156"));
+
+        GiftCertificate expected = new GiftCertificate(
+                1,
+                "The Beatles",
+                "Hello WOrld!.",
+                new BigDecimal("11.20"),
+                20,
+                LocalDateTime.parse("2019-08-29T06:12:15.156"),
+                LocalDateTime.parse("2021-08-29T06:12:15.156"),
+                Arrays.asList(TAG_2, TAG_3));
+
+        boolean success = giftDao.update(reqGiftC);
+        assertTrue(success);
+        assertEquals(expected, giftDao.getById(1));
+    }
+    @Test
+    @Order(5)
+    public void doFilter_test() throws DaoException{
+        String tag_name=null;
+        String name = null;
+        String description = null;
+        String sortBy = null;
+        String sortDir = null;
+
+
+    }
+
 
 }

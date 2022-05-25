@@ -78,7 +78,7 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
     @Override
     @Transactional
     public long insert(GiftCertificate gift) throws DaoException {
-        try {
+//        try {
             KeyHolder key = new GeneratedKeyHolder();
             jdbc.update(con -> {
                 PreparedStatement ps = con.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
@@ -92,9 +92,9 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
             }, key);
             updateTags(gift, key.getKey().longValue());
             return key.getKey().longValue();
-        } catch (DataAccessException e) {
-            throw new DaoException(SAVING_ERROR);
-        }
+//        } catch (DataAccessException e) {
+//            throw new DaoException(SAVING_ERROR);
+//        }
     }
 
     /**
@@ -126,12 +126,12 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
     @Override
     @Transactional
     public boolean update(GiftCertificate giftC) throws DaoException {
-        try {
+//        try {
             updateTags(giftC, giftC.getId());
             return jdbc.update(createUpdateQuery(giftC), giftC.getId()) > 0;
-        } catch (DataAccessException e) {
-            throw new DaoException(giftC.getId(), SAVING_ERROR);
-        }
+//        } catch (DataAccessException e) {
+//            throw new DaoException(giftC.getId(), SAVING_ERROR);
+//        }
     }
 
     private void updateTags(GiftCertificate gift, Long giftCertificateId) {

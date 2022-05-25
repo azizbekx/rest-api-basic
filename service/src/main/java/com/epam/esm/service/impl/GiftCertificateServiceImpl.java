@@ -54,6 +54,8 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
         List<Tag> reqTagsWithIds = saveNewTags(requestTags, tagList);
 
         giftCertificate.setTags(reqTagsWithIds);
+
+        System.out.println(giftCertificate);
         return giftDoa.insert(giftCertificate);
     }
 
@@ -73,7 +75,7 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
 
         List<Tag> reqTagWithIds = saveNewTags(requestTags, tagList);
         giftCertificate.setTags(reqTagWithIds);
-
+        System.out.println(giftCertificate);
         return giftDoa.update(giftCertificate);
     }
 
