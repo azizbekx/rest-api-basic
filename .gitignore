@@ -1,0 +1,4 @@
+./persistence/target
+./web/target
+./model/target
+./service/target
