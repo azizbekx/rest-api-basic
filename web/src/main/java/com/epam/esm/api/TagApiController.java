@@ -4,13 +4,11 @@ import com.epam.esm.dto.TagDto;
 import com.epam.esm.response.DaoException;
 import com.epam.esm.response.SuccessResponse;
 import com.epam.esm.service.TagService;
-import com.epam.esm.service.impl.TagServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Class {@code TagApiController} controller api.
@@ -43,6 +41,13 @@ public class TagApiController {
         return tagService.getById(id);
     }
 
+    /**
+     * Method for filtering objects with name
+     *
+     * @param tag_name
+     * @return
+     * @throws DaoException
+     */
     @GetMapping("/filter")
     public TagDto getByName(@RequestParam(value = "tag_name") String tag_name) throws DaoException{
         return tagService.getByName(tag_name);

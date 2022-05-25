@@ -164,6 +164,14 @@ public class GiftCertificateServiceTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    void delete_test() throws DaoException {
+        when(giftDao.removeById(1L)).thenReturn(true);
+
+        boolean success = giftCertificateService.deleteById(1L);
+        assertTrue(success);
+    }
+
     public List<Tag> createTagList() {
         return Arrays.asList(
                 new Tag(1, "tag_1"),

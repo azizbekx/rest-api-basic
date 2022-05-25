@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 /**
  * Class {@code GiftCertificateApiController} controller api which operation of all gift certificate system.
  */
@@ -21,6 +22,7 @@ public class GiftCertificateApiController {
 
     /**
      * Method for getting all object from db
+     *
      * @return List<GiftCertificateDto> entity is found entities in db
      * @throws DaoException an exception thrown in case of not found object in db
      */
@@ -28,8 +30,10 @@ public class GiftCertificateApiController {
     public List<GiftCertificateDto> getAll() throws DaoException {
         return giftCertificateService.getAll();
     }
+
     /**
      * Method for getting object with id from db
+     *
      * @param id it is id of object which is getting
      * @return GiftCertificateDto entity is found
      * @throws DaoException an exception thrown in case of not found object in db
@@ -38,17 +42,19 @@ public class GiftCertificateApiController {
     public GiftCertificateDto getById(@PathVariable int id) throws DaoException {
         return giftCertificateService.getById(id);
     }
+
     /**
      * Method for inserting object to db
-     * @param  giftCertificateDto is id of object which is getting
+     *
+     * @param giftCertificateDto is id of object which is getting
      * @return GiftCertificateDto entity is found
      * @throws DaoException an exception thrown in case of not found object in db
      */
     @PostMapping("/insert")
     @ResponseStatus(HttpStatus.CREATED)
     public @ResponseBody SuccessResponse insert(@RequestBody GiftCertificateDto giftCertificateDto) throws DaoException {
-        long id =  giftCertificateService.insert(giftCertificateDto);
-        return new SuccessResponse(true, "Object was successfully created (id = "+id+" )");
+        long id = giftCertificateService.insert(giftCertificateDto);
+        return new SuccessResponse(true, "Object was successfully created (id = " + id + " )");
     }
 
     /**
@@ -59,9 +65,10 @@ public class GiftCertificateApiController {
      * @throws DaoException an exception thrown in case of not found object in db
      */
     @PatchMapping("/update")
-    public @ResponseBody SuccessResponse update(@RequestBody GiftCertificateDto giftCertificateDto) throws DaoException{
+    public @ResponseBody SuccessResponse update(@RequestBody GiftCertificateDto giftCertificateDto) throws DaoException {
         boolean success = giftCertificateService.update(giftCertificateDto);
-        return new SuccessResponse(success,"Object was successfully updated (id = "+giftCertificateDto.getId()+" )");
+        String message = success ? "Object was successfully updated" : "Object cannot be updated";
+        return new SuccessResponse(success, message + " (id = " + giftCertificateDto.getId() + " )");
     }
 
     /**
@@ -75,17 +82,18 @@ public class GiftCertificateApiController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public @ResponseBody SuccessResponse deleteById(@PathVariable int id) throws DaoException {
         boolean success = giftCertificateService.deleteById(id);
-        return new SuccessResponse(success,"Object was successfully updated (id = "+id+" )");
+        String message = success ? "Object was successfully updated" : "Object cannot be updated";
+        return new SuccessResponse(success, message + " (id = " + id + " )");
     }
 
     /**
      * Method for filtering objects in db
      *
-     * @param tag_name name of Tag for getting gift certificates
-     * @param name name of gift certificate for searching pattern
+     * @param tag_name    name of Tag for getting gift certificates
+     * @param name        name of gift certificate for searching pattern
      * @param description description of gift certificates for searching pattern
-     * @param sortBy field of gift certificate for sorting objects
-     * @param sortDir name of ordering asc or desc order
+     * @param sortBy      field of gift certificate for sorting objects
+     * @param sortDir     name of ordering asc or desc order
      * @return List of GiftCertificates
      * @throws DaoException an exception thrown in case of not found object in db
      */
@@ -96,7 +104,7 @@ public class GiftCertificateApiController {
             @RequestParam(value = "description", required = false) String description,
             @RequestParam(value = "sortBy", required = false) String sortBy,
             @RequestParam(value = "sortDir", required = false) String sortDir
-    ) throws DaoException{
-        return giftCertificateService.doFilter(tag_name,name, description, sortBy, sortDir);
+    ) throws DaoException {
+        return giftCertificateService.doFilter(tag_name, name, description, sortBy, sortDir);
     }
 }

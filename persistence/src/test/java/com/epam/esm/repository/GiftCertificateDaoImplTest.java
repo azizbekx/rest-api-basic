@@ -76,6 +76,20 @@ public class GiftCertificateDaoImplTest {
     }
     @Test
     @Order(3)
+    public void doFilter_test() throws DaoException{
+        String tag_name="tag_1";
+        String name = null;
+        String description = null;
+        String sortBy = null;
+        String sortDir = null;
+
+        List<GiftCertificate> giftCList = giftDao.getWithFilters(tag_name,name,description,sortBy,sortDir);
+        assertNotNull(giftCList);
+        assertEquals(Collections.singletonList(GIFT_CERTIFICATE_2),giftCList);
+    }
+
+    @Test
+    @Order(4)
     public void insert_test() throws DaoException{
         GiftCertificate reqGiftC = new GiftCertificate(
                 "The Beatles",
@@ -104,12 +118,7 @@ public class GiftCertificateDaoImplTest {
     }
 
 
-    @Test
-    @Order(4)
-    public void delete_test() throws DaoException{
-        boolean success = giftDao.removeById(1);
-        assertTrue(success);
-    }
+
 
     @Test
     @Order(5)
@@ -136,17 +145,10 @@ public class GiftCertificateDaoImplTest {
         assertEquals(expected, giftDao.getById(1));
     }
     @Test
-    @Order(5)
-    public void doFilter_test() throws DaoException{
-        String tag_name="tag_1";
-        String name = null;
-        String description = null;
-        String sortBy = null;
-        String sortDir = null;
-
-        List<GiftCertificate> giftCList = giftDao.getWithFilters(tag_name,name,description,sortBy,sortDir);
-        assertNotNull(giftCList);
-        assertEquals(Collections.singletonList(GIFT_CERTIFICATE_2),giftCList);
+    @Order(6)
+    public void delete_test() throws DaoException{
+        boolean success = giftDao.removeById(1);
+        assertTrue(success);
     }
 
 
