@@ -2,9 +2,9 @@ package com.epam.esm.repository.impl;
 
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.Tag;
-import com.epam.esm.response.DaoException;
 import com.epam.esm.mapper.GiftCertificateListRowMapper;
 import com.epam.esm.repository.GiftCertificateDao;
+import com.epam.esm.response.DaoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -78,7 +78,7 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
     @Override
     @Transactional
     public long insert(GiftCertificate gift) throws DaoException {
-//        try {
+        try {
             KeyHolder key = new GeneratedKeyHolder();
             jdbc.update(con -> {
                 PreparedStatement ps = con.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS);
@@ -92,9 +92,9 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
             }, key);
             updateTags(gift, key.getKey().longValue());
             return key.getKey().longValue();
-//        } catch (DataAccessException e) {
-//            throw new DaoException(SAVING_ERROR);
-//        }
+        } catch (DataAccessException e) {
+            throw new DaoException(SAVING_ERROR);
+        }
     }
 
     /**
@@ -126,12 +126,12 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
     @Override
     @Transactional
     public boolean update(GiftCertificate giftC) throws DaoException {
-//        try {
+        try {
             updateTags(giftC, giftC.getId());
             return jdbc.update(createUpdateQuery(giftC), giftC.getId()) > 0;
-//        } catch (DataAccessException e) {
-//            throw new DaoException(giftC.getId(), SAVING_ERROR);
-//        }
+        } catch (DataAccessException e) {
+            throw new DaoException(giftC.getId(), SAVING_ERROR);
+        }
     }
 
     private void updateTags(GiftCertificate gift, Long giftCertificateId) {
@@ -145,29 +145,8 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
             jdbc.update(addTags, giftCertificateId, tagId);
         }
     }
-    private List<Long> getTagIds(GiftCertificate giftCertificate) {
-        return giftCertificate.getTags().stream()
-                .map(Tag::getId)
-                .collect(Collectors.toList());
-    }
-    private String createUpdateQuery(GiftCertificate giftC) {
-        String updateQuery = "UPDATE gift_certificate SET ";
-        StringJoiner stringJoiner = new StringJoiner(", ");
-        if (giftC.getName() != null) {
-            stringJoiner.add("name  = '" + giftC.getName() + "' ");
-        }
-        if (giftC.getDescription() != null) {
-            stringJoiner.add("description = '" + giftC.getDescription() + "' ");
-        }
-        if (giftC.getPrice() != null) {
-            stringJoiner.add("price = '" + giftC.getPrice() + "' ");
-        }
-        if (giftC.getDuration() != 0) {
-            stringJoiner.add("duration = '" + giftC.getDuration() + "' ");
-        }
-        updateQuery += stringJoiner + " WHERE id = ?";
-        return updateQuery;
-    }
+
+
     @Override
     public List<GiftCertificate> getWithFilters(String tag_name, String name, String description, String sortBy, String sortDir) throws DaoException {
         try{
@@ -196,9 +175,30 @@ public class GiftCertificateDaoImpl implements GiftCertificateDao {
                 sortQuery += " " + sortDir;
             }
         }
-        filterQuery += findQuery != null ?" WHERE " + findQuery+sortQuery: sortQuery;
+        filterQuery += findQuery.toString().isEmpty()?sortQuery: " WHERE " + findQuery+sortQuery;
         return filterQuery;
     }
-
-
+    private String createUpdateQuery(GiftCertificate giftC) {
+        String updateQuery = "UPDATE gift_certificate SET ";
+        StringJoiner stringJoiner = new StringJoiner(", ");
+        if (giftC.getName() != null) {
+            stringJoiner.add("name  = '" + giftC.getName() + "' ");
+        }
+        if (giftC.getDescription() != null) {
+            stringJoiner.add("description = '" + giftC.getDescription() + "' ");
+        }
+        if (giftC.getPrice() != null) {
+            stringJoiner.add("price = '" + giftC.getPrice() + "' ");
+        }
+        if (giftC.getDuration() != 0) {
+            stringJoiner.add("duration = '" + giftC.getDuration() + "' ");
+        }
+        updateQuery += stringJoiner + " WHERE id = ?";
+        return updateQuery;
+    }
+    private List<Long> getTagIds(GiftCertificate giftCertificate) {
+        return giftCertificate.getTags().stream()
+                .map(Tag::getId)
+                .collect(Collectors.toList());
+    }
 }

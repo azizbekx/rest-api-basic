@@ -1,5 +1,7 @@
 package com.epam.esm.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class GiftCertificateDto {
     private int duration;
     private String create_date;
     private String last_update_date;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<TagDto> tags;
 
     public GiftCertificateDto() {
@@ -101,4 +104,5 @@ public class GiftCertificateDto {
     public void setTags(List<TagDto> tags) {
         this.tags = tags;
     }
+
 }

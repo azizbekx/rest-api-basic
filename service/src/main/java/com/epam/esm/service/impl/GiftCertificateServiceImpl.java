@@ -3,11 +3,11 @@ package com.epam.esm.service.impl;
 import com.epam.esm.dto.GiftCertificateDto;
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.Tag;
-import com.epam.esm.response.DaoException;
 import com.epam.esm.handler.DateHandler;
 import com.epam.esm.mapper.GiftCertificateConverter;
 import com.epam.esm.repository.GiftCertificateDao;
 import com.epam.esm.repository.TagDao;
+import com.epam.esm.response.DaoException;
 import com.epam.esm.service.GiftCertificateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,6 @@ public class GiftCertificateServiceImpl implements GiftCertificateService {
     @Override
     public List<GiftCertificateDto> getAll() throws DaoException {
         List<GiftCertificate> giftCertificates = giftDoa.list();
-
         return giftCertificates
                 .stream()
                 .map(GiftCertificateConverter::toDto)

@@ -21,10 +21,12 @@ public class GiftCertificateConverter {
                 String.valueOf(gift.getLastUpdateTime())
         );
         if (gift.getTags() != null) {
-            List<TagDto> tagDtos = gift.getTags().stream()
-                    .map(TagConverter::toDto)
-                    .collect(Collectors.toList());
-            giftCertificateDto.setTags(tagDtos);
+            if (gift.getTags().get(0).getName()!=null) {
+                List<TagDto> tagDtos = gift.getTags().stream()
+                        .map(TagConverter::toDto)
+                        .collect(Collectors.toList());
+                giftCertificateDto.setTags(tagDtos);
+            }
         }
         return giftCertificateDto;
     }
@@ -42,10 +44,12 @@ public class GiftCertificateConverter {
             gift.setLastUpdateTime(LocalDateTime.parse(giftDto.getLast_update_date()));
         }
         if (giftDto.getTags() != null) {
-            List<Tag> tags = giftDto.getTags().stream()
-                    .map(TagConverter::toEntity)
-                    .collect(Collectors.toList());
-            gift.setTags(tags);
+            if (giftDto.getTags().get(0).getTag_name()!=null) {
+                List<Tag> tags = giftDto.getTags().stream()
+                        .map(TagConverter::toEntity)
+                        .collect(Collectors.toList());
+                gift.setTags(tags);
+            }
         }
         return gift;
     }

@@ -1,26 +1,19 @@
 package com.epam.esm.service;
 
-import com.epam.esm.dto.GiftCertificateDto;
 import com.epam.esm.entity.GiftCertificate;
 import com.epam.esm.entity.Tag;
 import com.epam.esm.handler.DateHandler;
 import com.epam.esm.mapper.GiftCertificateConverter;
-import com.epam.esm.repository.TagDao;
 import com.epam.esm.repository.impl.GiftCertificateDaoImpl;
 import com.epam.esm.repository.impl.TagDaoImpl;
 import com.epam.esm.response.DaoException;
 import com.epam.esm.service.impl.GiftCertificateServiceImpl;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.when;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -29,8 +22,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//@ContextConfiguration(classes = DataTestConfig.class)
-//@ActiveProfiles("test")
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class GiftCertificateServiceTest {
     @Mock
@@ -39,7 +34,7 @@ public class GiftCertificateServiceTest {
     @Mock
     private TagDaoImpl tagDao = Mockito.mock(TagDaoImpl.class);
 
-    private DateHandler dateHandler = Mockito.mock(DateHandler.class);
+    private final DateHandler dateHandler = Mockito.mock(DateHandler.class);
     @InjectMocks
     private GiftCertificateServiceImpl giftCertificateService;
 
@@ -154,9 +149,6 @@ public class GiftCertificateServiceTest {
 
     }
 
-
-
-
     @Test
     void doFilter_test() throws DaoException {
         String tag_name = null, name = "as", description = null, sortBy = null, sortDir = null;
@@ -172,7 +164,7 @@ public class GiftCertificateServiceTest {
         assertEquals(expected, actual);
     }
 
-    public List<Tag> createTagList() throws DaoException {
+    public List<Tag> createTagList() {
         return Arrays.asList(
                 new Tag(1, "tag_1"),
                 new Tag(2, "tag_2"),

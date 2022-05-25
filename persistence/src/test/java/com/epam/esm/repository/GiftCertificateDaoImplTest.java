@@ -138,13 +138,15 @@ public class GiftCertificateDaoImplTest {
     @Test
     @Order(5)
     public void doFilter_test() throws DaoException{
-        String tag_name=null;
+        String tag_name="tag_1";
         String name = null;
         String description = null;
         String sortBy = null;
         String sortDir = null;
 
-
+        List<GiftCertificate> giftCList = giftDao.getWithFilters(tag_name,name,description,sortBy,sortDir);
+        assertNotNull(giftCList);
+        assertEquals(Collections.singletonList(GIFT_CERTIFICATE_2),giftCList);
     }
 
 
