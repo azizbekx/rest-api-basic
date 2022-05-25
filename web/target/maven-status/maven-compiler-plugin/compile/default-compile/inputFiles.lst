@@ -1,8 +1,0 @@
-/home/azizbek/Projects/epam/module-2/rest-api-basic/web/src/main/java/com/epam/esm/response/SuccessResponse.java
-/home/azizbek/Projects/epam/module-2/rest-api-basic/web/src/main/java/com/epam/esm/config/SpringConfig.java
-/home/azizbek/Projects/epam/module-2/rest-api-basic/web/src/main/java/com/epam/esm/config/SpringDispatcherConfig.java
-/home/azizbek/Projects/epam/module-2/rest-api-basic/web/src/main/java/com/epam/esm/response/ErrorResponse.java
-/home/azizbek/Projects/epam/module-2/rest-api-basic/web/src/main/java/com/epam/esm/api/ExceptionsHandler.java
-/home/azizbek/Projects/epam/module-2/rest-api-basic/web/src/main/java/com/epam/esm/api/TagApiController.java
-/home/azizbek/Projects/epam/module-2/rest-api-basic/web/src/main/java/com/epam/esm/api/GiftCertificateApiController.java
-/home/azizbek/Projects/epam/module-2/rest-api-basic/web/src/main/java/com/epam/esm/response/ErrorResponseCode.java
